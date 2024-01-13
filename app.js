@@ -29,6 +29,10 @@ app.get('/post.html',(req, res)=>{
   res.render('post')
 })
 
+app.get('/contact.html',(req, res)=>{
+  res.render('contact')
+})
+
 app.get('/add_post.html',(req, res)=>{
   res.render('add_post')
 })
