@@ -27,7 +27,7 @@
         <% for (let i = 0; i<photos.length; i++){ %>
 
         <div class="post-preview">
-          <a href="post.html">
+          <a href="/photos/<%= photos[i]._id %>">
             <h2 class="post-title">
               <%= photos[i].title %>
             </h2>
@@ -92,13 +92,3 @@
   <!-- Footer -->
   <%- include('partials/_footer') -%>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="js/clean-blog.min.js"></script>
-
-</body>
-
-</html>
