@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
 const ejs = require('ejs');
-const photo = require('./models/Photo');
 const mongoose = require('mongoose');
 const Photo = require('./models/Photo');
+const fileUpload = require('express-fileupload');
+const methodOverride = require('method-override');
+const photoController = require('./controllers/photoControllers');
+const pageController = require('./controllers/pageController');
+const messageController = require('./controllers/messageController');
 
 const app = express();
 
@@ -20,48 +24,43 @@ app.set('view engine', 'ejs');
 // MIDDLEWARES
 
 app.use(express.static('public'));
-app.use(express.urlencoded({extended:true}))
-app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(fileUpload());
+app.use(
+  methodOverride('_method', {
+    methods: ['POST', 'GET'],
+  })
+);
 
 // ROUTES
 
-app.get('/', async (req, res) => {
-  const photos = await Photo.find({})
-  res.render('index',{
-    photos
-  });
-});
+app.get('/', photoController.getAllPhotos);
+
+app.get('/photos/:id', photoController.getPhoto);
+
+app.get('/about.html', pageController.getAboutPage);
+
+app.get('/post.html', pageController.getAddPage);
+
+app.get('/contact.html', pageController.getContactPage);
+
+app.get('/add_post.html', pageController.getAddPage);
+
+app.post('/photos', photoController.createPhoto);
+
+app.get('/edit-blog/:id', pageController.getEditPage);
+
+app.put('/edit-blog-detail/:id', photoController.updatePhoto);
+
+app.delete('/photos/:id', photoController.deletePhoto);
 
 
-app.get('/about.html', (req, res) => {
-  res.render('about');
-});
+app.get('/messages', messageController.getMessages);
 
-app.get('/post.html',(req, res)=>{
-  res.render('post')
-})
+app.post('/messages',messageController.sendMessages)
 
-app.get('/contact.html',(req, res)=>{
-  res.render('contact')
-})
-
-app.get('/add_post.html',(req, res)=>{
-  res.render('add_post')
-})
-
-
-app.post('/photos', async (req,res)=>{
-  await Photo.create(req.body)  
-  res.redirect('/')
-})
-
-app.get('/photos/:id', async (req, res)=>{
-  const photo = await Photo.findById(req.params.id)
-  res.render('post',{
-    photo
-  });
-})
-
+app.delete('/messages/:id',messageController.deleteMessages)
 
 const port = 3000;
 app.listen(port, () => console.log(`http://localhost:${port}`));

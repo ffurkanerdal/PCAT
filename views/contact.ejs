@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-            <h1>Add New Post</h1>
+            <h1>Send Message</h1>
 
           </div>
         </div>
@@ -24,28 +24,28 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <form novalidate>
+        <form method="POST" action="/messages">
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Post Title</label>
               <div class="row my-4">
                 <div class="col-6">
-                  <input type="text" class="form-control" placeholder="First Name" id="fname" required data-validation-required-message="Please enter your first name.">
+                  <input type="text" class="form-control" placeholder="First Name" name="first_name" required data-validation-required-message="Please enter your first name.">
                 </div>
                 <div class="col-6">
-                    <input type="text" class="form-control" placeholder="Last Name" id="lname" required data-validation-required-message="Please enter your last name.">
+                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" required data-validation-required-message="Please enter your last name.">
                 </div>
               </div>
               
               <div class="row my-4">
                 <div class="col-12">
-                  <input type="email" class="form-control" placeholder="Email" id="email" required data-validation-required-message="Please enter your email.">
+                  <input type="email" class="form-control" placeholder="Email" name="email" required data-validation-required-message="Please enter your email.">
                 </div>
               </div>
 
               <div class="row my-4 ">
                 <div class="col-12">
-                    <select class="form-control" name="contact-select" id="contact-select" required data-validation-required-message="Please select your Subject.">
+                    <select class="form-control" name="subject" required data-validation-required-message="Please select your Subject.">
                         <option class="form-control" value="-">Subject</option>
                         <option class="form-control" value="sales">Sales</option>
                         <option class="form-control" value="creative">creative</option>
@@ -59,7 +59,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Post Detail</label>
-              <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+              <textarea rows="5" class="form-control" placeholder="Message" name="message" required data-validation-required-message="Please enter a message."></textarea>
               <p class="help-block text-danger"></p>
             </div>
           </div>

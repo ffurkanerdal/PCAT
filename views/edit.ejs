@@ -6,13 +6,13 @@
   <%- include('partials/_navigation') -%>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/contact-bg.jpg')">
+  <header class="masthead" style="background-image: url('<%= blog.image %>')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-            <h1>Add New Post</h1>
+            <h1>Edit Post</h1>
 
           </div>
         </div>
@@ -24,24 +24,26 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <form method="POST" action="/photos" enctype="multipart/form-data">
+        <form method="POST" action="/edit-blog-detail/<%= blog.id  %>?_method=PUT" enctype="multipart/form-data">
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Post Title</label>
-              <input type="text" class="form-control" placeholder="Title" name="title" required data-validation-required-message="Please enter your name.">
+              <input type="text" class="form-control" value="<%= blog.title %>" name="title" required data-validation-required-message="Please enter your name.">
               <p class="help-block text-danger"></p>
             </div>
           </div>
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Post Detail</label>
-              <textarea rows="5" class="form-control" placeholder="Text" name="description" required data-validation-required-message="Please enter a text."></textarea>
+              <textarea rows="5" class="form-control" name="description" required data-validation-required-message="Please enter a text."><%= blog.description %></textarea>
               <p class="help-block text-danger"></p>
             </div>
           </div>
 
+
           <div class="form-group">
-            <input type="file" name="image" class="form-control">
+              <input type="file" name="image" class="form-control"   data-validation-required-message="Please enter a image.">
+            <img src="<%= blog.image %>" alt="Image Not Found" class="img-thumbnail">
           </div>
           <br>
           <div id="success"></div>
