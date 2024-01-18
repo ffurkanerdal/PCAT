@@ -12,10 +12,14 @@ const messageController = require('./controllers/messageController');
 const app = express();
 
 // Connect db
-mongoose.connect('mongodb://127.0.0.1:27017/cleanblog-test-db', {
+mongoose.connect('mongodb+srv://ffurkanerdal:JvII8ObY78USy9P8@clean-blog.yhubg51.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+}).then(() =>{
+  console.log('DB Connected')
+}).catch((err)=>{
+  console.log(err)
+})
 
 // TEMPLATE ENGINE
 
@@ -62,5 +66,5 @@ app.post('/messages',messageController.sendMessages)
 
 app.delete('/messages/:id',messageController.deleteMessages)
 
-const port = 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`http://localhost:${port}`));
